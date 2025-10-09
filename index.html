@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>覇道計算</title>
+<style>
+  body {
+    font-family: "Meiryo", sans-serif;
+    text-align: center;
+    background: #fff;
+    padding: 40px;
+  }
+  .input-row {
+    margin: 8px 0;
+  }
+  label {
+    font-size: 1.1em;
+    margin-right: 5px;
+  }
+  input[type=number] {
+    width: 80px;
+    font-size: 1.1em;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  #result {
+    margin-top: 20px;
+    font-size: 1.1em;
+  }
+  hr {
+    width: 220px;
+    margin: 20px auto;
+  }
+</style>
+</head>
+<body>
+
+<h2>覇道計算</h2>
+
+<div class="input-row">
+  <label for="A">自陣座標：</label><input type="number" id="A" inputmode="numeric">
+  <label for="B">,</label><input type="number" id="B" inputmode="numeric">
+</div>
+
+<div class="input-row">
+  <label for="C">目標座標：</label><input type="number" id="C" inputmode="numeric">
+  <label for="D">,</label><input type="number" id="D" inputmode="numeric">
+</div>
+
+<hr>
+
+<div id="result">入力待ち...</div>
+
+<script>
+function calc() {
+  const A = parseFloat(document.getElementById("A").value);
+  const B = parseFloat(document.getElementById("B").value);
+  const C = parseFloat(document.getElementById("C").value);
+  const D = parseFloat(document.getElementById("D").value);
+
+  // 4つすべて未入力なら結果クリア
+  if ([A,B,C,D].some(isNaN)) {
+    document.getElementById("result").innerHTML = "入力待ち...";
+    return;
+  }
+
+  const base = Math.abs(A - C);
+  const height = Math.abs(B - D);
+  const hypotenuse = Math.floor(Math.sqrt(base ** 2 + height ** 2)); // 小数切り捨て
+
+  let message = "";
+  if (hypotenuse <= 50) {
+    message = `距離：${hypotenuse}<br><b>宣戦・調達ともに可能</b>`;
+  } else if (hypotenuse <= 100) {
+    message = `距離：${hypotenuse}<br><b>調達のみ可能</b>`;
+  } else {
+    message = `距離：${hypotenuse}<br><b>宣戦・調達ともに不可</b>`;
+  }
+
+  document.getElementById("result").innerHTML = message;
+}
+
+// 入力が変わるたびに自動計算
+document.querySelectorAll("input").forEach(el => {
+  el.addEventListener("input", calc);
+});
+</script>
+
+</body>
+</html>
