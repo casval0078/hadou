@@ -10,6 +10,7 @@
     margin: 40px;
     background: #f7f7f7;
   }
+
   table {
     border-collapse: collapse;
     width: 700px;
@@ -17,6 +18,7 @@
     margin-bottom: 30px;
     table-layout: fixed;
   }
+
   th, td {
     border: 1px solid #ccc;
     padding: 8px;
@@ -24,26 +26,79 @@
     overflow: hidden;
     white-space: nowrap;
   }
+
   th {
     background: #eee;
   }
+
   tfoot td {
     font-weight: bold;
     background: #fafafa;
   }
+
   input[type="number"] {
     width: 80px;
     text-align: right;
   }
+
   td.needed {
     width: 120px;
     text-align: right;
     font-variant-numeric: tabular-nums;
   }
+
   td.result {
     width: 140px;
     text-align: right;
     font-variant-numeric: tabular-nums;
+  }
+
+  /* ----------------------------
+     スマホ・タブレット対応
+     ---------------------------- */
+  @media (max-width: 768px) {
+    body {
+      margin: 10px;
+    }
+
+    table {
+      width: 100%;           /* 画面幅いっぱいに */
+      font-size: 13px;       /* 少し文字を小さく */
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 6px;
+      white-space: normal;   /* 折り返しを許可 */
+      word-break: keep-all;
+    }
+
+    input[type="number"] {
+      width: 100%;           /* 列幅に合わせる */
+      max-width: 70px;
+    }
+
+    td.needed, td.result {
+      width: auto;           /* 固定幅解除 */
+      font-size: 13px;
+    }
+
+    /* 表が横に長すぎる場合はスクロールを許可 */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  /* 極小スマホ（幅480px以下）はさらに微調整 */
+  @media (max-width: 480px) {
+    table {
+      font-size: 12px;
+    }
+
+    input[type="number"] {
+      max-width: 60px;
+    }
   }
 </style>
 </head>
