@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ポイント自動計算表</title>
+<style>
+  body {
+    font-family: "Meiryo", sans-serif;
+    margin: 40px;
+    background: #f7f7f7;
+  }
+  table {
+    border-collapse: collapse;
+    width: 700px;
+    background: white;
+    margin-bottom: 30px;
+    table-layout: fixed;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  th {
+    background: #eee;
+  }
+  tfoot td {
+    font-weight: bold;
+    background: #fafafa;
+  }
+  input[type="number"] {
+    width: 80px;
+    text-align: right;
+  }
+  td.needed {
+    width: 120px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  td.result {
+    width: 140px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+</head>
+<body>
+
+<h2>特別調達支援</h2>
+
+<table id="pointTable">
+  <thead>
+    <tr>
+      <th>アイテム名</th>
+      <th>個数</th>
+      <th>Pt</th>
+      <th>個数(入力欄)</th>
+      <th>必要Pt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>スタンプ</td><td>1</td><td>100000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>軍団戦スタンプ</td><td>1</td><td>100000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>縛虎申友好度</td><td>10</td><td>100000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>ムタ友好度</td><td>10</td><td>50000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>特別登用札・SSR</td><td>1</td><td>750000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>英傑登用札</td><td>10</td><td>35000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>大物登用札</td><td>20</td><td>25000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>一般登用札</td><td>20</td><td>7000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>経験書・特</td><td>20</td><td>10000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>経験書・上</td><td>40</td><td>6000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>経験書・中</td><td>60</td><td>1500</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>経験書・初</td><td>80</td><td>300</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>自陣移転令</td><td>10</td><td>25000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>自陣移転令</td><td>10</td><td>50000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>軍令書回復・中</td><td>5</td><td>25000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>軍令書回復・中</td><td>5</td><td>50000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>調達書回復・中</td><td>5</td><td>12500</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>調達書回復・中</td><td>5</td><td>25000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>即帰還令</td><td>10</td><td>12500</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>即帰還令</td><td>10</td><td>25000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>交流更新令</td><td>30</td><td>5000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>交流更新令</td><td>30</td><td>10000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>衰弱短縮令</td><td>8</td><td>7500</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>調達回数回復・中</td><td>10</td><td>75000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>調達回数回復・初</td><td>20</td><td>37000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>徴兵令・中</td><td>10</td><td>27000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>徴兵令・中</td><td>10</td><td>54000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>伝承短縮・上</td><td>10</td><td>30000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>伝承短縮・中</td><td>20</td><td>7500</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>心得強化短縮・上</td><td>10</td><td>30000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>心得強化短縮・中</td><td>20</td><td>7500</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>兵事短縮・中</td><td>10</td><td>7500</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>返上令</td><td>10</td><td>25000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>交流Pt(200)</td><td>100</td><td>8000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+    <tr><td>交流Pt(200)</td><td>100</td><td>16000</td><td><input type="number" value="0" min="0"></td><td class="needed"></td></tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">合計Pt</td>
+      <td id="total" class="needed">0</td>
+    </tr>
+  </tfoot>
+</table>
+
+<h2>目安</h2>
+
+<table id="gokuiTable">
+  <thead>
+    <tr>
+      <th>調達(制圧)地</th>
+      <th>極意(%)</th>
+      <th>24時間フル回転で</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>C × 4</td><td>96000</td><td class="result"></td></tr>
+    <tr><td>C × 3・B × 1</td><td>108000</td><td class="result"></td></tr>
+    <tr><td>B × 4</td><td>144000</td><td class="result"></td></tr>
+    <tr><td>B × 3・A × 1</td><td>168000</td><td class="result"></td></tr>
+  </tbody>
+</table>
+
+
+<script>
+  const table = document.getElementById("pointTable");
+  const inputs = table.querySelectorAll("input[type='number']");
+  const totalCell = document.getElementById("total");
+
+  function updatePoints() {
+    let total = 0;
+    inputs.forEach(input => {
+      const row = input.closest("tr");
+      const pt = parseInt(row.children[2].textContent) || 0;
+      const max = parseInt(row.children[1].textContent) || 0;
+      let num = parseInt(input.value) || 0;
+
+      // 入力値が最大値を超えたら自動的に修正
+      if (num > max) {
+        num = max;
+        input.value = max;
+      }
+
+      input.max = max;
+      const needed = pt * num;
+      row.querySelector(".needed").textContent = needed.toLocaleString();
+      total += needed;
+    });
+    totalCell.textContent = total.toLocaleString();
+  }
+
+  inputs.forEach(input => input.addEventListener("input", updatePoints));
+  updatePoints(); // 初期化時に反映
+
+  // ===== 極意計算表 =====
+  const gokuiTable = document.getElementById("gokuiTable");
+  gokuiTable.querySelectorAll("tbody tr").forEach(row => {
+    const baseCell = row.children[1];
+    const baseValue = parseFloat(baseCell.textContent);
+
+    // 極意(%)に入力欄を追加
+    baseCell.innerHTML = `<input type="number" value="0" min="0" step="10" style="width:80px;text-align:right;">`;
+    baseCell.dataset.base = baseValue;
+  });
+
+  function updateGokui() {
+    gokuiTable.querySelectorAll("tbody tr").forEach(row => {
+      const x = parseFloat(row.children[1].dataset.base) || 0; // 96000など
+      const y = parseFloat(row.children[1].querySelector("input").value) || 0; // 極意％
+      const result = x * (1 + y * 0.01) * 41;
+      row.querySelector(".result").textContent = result.toLocaleString(undefined, {maximumFractionDigits: 0});
+    });
+  }
+
+  gokuiTable.querySelectorAll("input").forEach(input => input.addEventListener("input", updateGokui));
+  updateGokui();
+</script>
+
+</body>
+</html>
